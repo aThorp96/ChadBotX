@@ -1,17 +1,10 @@
 import serial
 
-port = "/dev/ttyUSB0"
-baudrate = 115200
-bytesize = serial.EIGHTBITS
-filename = "./TAS-inputs/no-lag-frames.txt"
-f = open(filename, "rb")
-
-rx = serial.Serial(port, baudrate, bytesize)
-
-def read():
+def read(filename="./TAS-inputs/no-lag-frames.txt", port="/dev/ttyUSB0"):
     # Read bytes from arduino
     
-    # byte = f.read(1)
+    f = open(filename, "rb")
+    rx = serial.Serial(port=port, baudrate=115200, bytesize=serial.EIGHTBITS)
 
     next_byte_is_instruction = False
 
@@ -26,26 +19,26 @@ def read():
 
         elif (next_byte_is_instruction):
             # Recieved special instruction from arduino
-            execute(byte)
+            execute(byte, f, rx)
             next_byte_is_instruction = False
 
-def sendNextByte():
+def sendNextByte(f, rx):
     byte = f.read(1)
 
     if not byte:
         # End of file
         rx.write(0xFF)
         rx.write(0xAA)
-        terminate()
+        terminate(f, rx)
 
     else:
         print(byte)
         rx.write(byte)
 
-def execute(byte):
+def execute(byte, f, rx):
     if (byte == 0xAA):
         # End of file
-        terminate()
+        terminate(f, rx)
     elif (byte == 0xBB):
         print('testB')
         # Set mode read
@@ -57,12 +50,10 @@ def execute(byte):
         # Stop playing
     elif (byte == 0xDD):
         # Ready for bits
-        sendNextByte()
+        sendNextByte(f, rx)
 
 
-def terminate():
+def terminate(f, rx):
     f.close()
     rx.close()
     quit()
-
-read()
