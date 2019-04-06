@@ -36,12 +36,26 @@ def byteToStr(byte):
             buttonString += '.'
 
     return buttonString
-BAO = byteArrayOut("../TAS-inputs/HappyLee_SMB_TAS.fm2")
-b_t_t(BAO)
 
-print(BAO)
+def charByteToByteArray(fn):
+    f = open(fn)
+    byta = []
+    
+    while True:
+        c = f.read(1)
+        if not c:
+            print("end of file")
+            break
+        byta.append(c)
+    return bytes(byta)
+
+#BAO = byteArrayOut("../TAS-inputs/HappyLee_SMB_TAS.fm2")
+#b_t_t(BAO)
+
+#print(BAO)
   
 #print(byteToStr(0x88))
+print(charByteToByteArray("../TAS-inputs/no-lag-frames.txt"))
 
 def generateFM2(byteArray):
     file = open('../outputs/output.fm2', 'w')
@@ -74,4 +88,4 @@ def generateFM2(byteArray):
         file.write(prefix + byteToStr(byte) + '|........||' + '\n')
 
 
-generateFM2(BAO)
+#generateFM2(BAO)
