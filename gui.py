@@ -3,12 +3,9 @@ from tkinter import ttk, filedialog, messagebox
 import serial.tools.list_ports
 from PIL import ImageTk, Image
 
-<<<<<<< HEAD
 root = tkinter.Tk()
 root.title('ChadBotX')
 
-=======
->>>>>>> 5ee4acda87fef52be3f674f38b872443b9901f57
 # Define constants for mode selection
 MODE_RECORD = 1
 MODE_PLAYBACK = 2
