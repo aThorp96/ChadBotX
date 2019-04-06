@@ -1,5 +1,5 @@
-import txt_to_bytearray, play_driver
+import t_t_b, play_driver
 
-array = txt_to_bytearray.txt_to_byte("happylee-supermariobros,warped.txt")
+array = helpers.t_t_b("happylee-supermariobros,warped.txt")
 
 #play_driver.output(array)
