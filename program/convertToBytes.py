@@ -1,3 +1,5 @@
+from helpers import b_t_t
+
 def byteArrayOut(fm2):
     with open(fm2) as f:
         f_array = f.readlines()
@@ -22,7 +24,6 @@ def strToByte(buttonString):
     #10000001
     #X81
 
-
 def byteToStr(byte):
     buttons = 'RLDUTSBA'
     binString = '{0:08b}'.format(byte)
@@ -36,7 +37,7 @@ def byteToStr(byte):
 
     return buttonString
 BAO = byteArrayOut("../TAS-inputs/HappyLee_SMB_TAS.fm2")
-
+b_t_t(BAO)
 
 print(BAO)
   
