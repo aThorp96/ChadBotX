@@ -1,12 +1,15 @@
 import serial
 
-rx = serial.Serial('/dev/ttyUSB1', 115200)
+f = open("./outputs/bytes.txt", "w")
+rx = serial.Serial('/dev/ttyUSB0', baudrate=115200, bytesize=serial.EIGHTBITS, timeout=1.0)
 
-read_byte = rx.read()
+bytes = rx.read()
 
-while read_byte is not None:
+while bytes is not None:
     # Print each byte from serial data
-    read_byte = rx.read()
-    print(ord(read_byte))
+    bytes = rx.read()
+    print(chr(ord(bytes)))
+    f.write(chr(ord(bytes)))
 
+f.close()
 rx.close()
