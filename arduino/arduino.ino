@@ -1,10 +1,9 @@
 void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.begin(115200);
 }
 
+int i = 0;
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
+  Serial.write(i);
+  i = i == 255 ? 0 : i + 1;
 }
