@@ -3,12 +3,12 @@ import serial
 # "./outputs/bytes.txt"
 # "/dev/ttyUSB0"
 def write(filename, port, baudrate=115200, bytesize=serial.EIGHTBITS):
-    f = open(filename, "rb")
+    f = open(filename, "w")
     rx = serial.Serial(port, baudrate, bytesize)
 
     next_byte_is_instruction = False
 
-    while bytes is not None:
+    while True:
         # Print each byte from serial data
         bytes = rx.read()
         byte = ord(bytes)
@@ -16,6 +16,10 @@ def write(filename, port, baudrate=115200, bytesize=serial.EIGHTBITS):
         if (byte == 0xFF):
             # Begin instruction
             next_byte_is_instruction = True
+
+        elif (byte not 0x00 and not next_byte_is_instruction):
+            # Read controller button input
+            # TODO: Write byte to file
         elif (next_byte_is_instruction):
             # Recieved special instruction from arduino
             execute(byte, f, rx)

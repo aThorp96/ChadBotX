@@ -2,6 +2,7 @@ import tkinter
 from tkinter import ttk, filedialog, messagebox
 import serial.tools.list_ports
 from PIL import ImageTk, Image
+from read_bytes import read
 
 root = tkinter.Tk()
 root.title('ChadBotX')
@@ -19,7 +20,7 @@ action_button = tkinter.StringVar(root, "Start")
 def pick_file():
     # Open file picker and return name of file selcted
 
-    newfilename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("Movie files","*.fm2"),("all files","*.*")))
+    newfilename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("Byte files","*.txt"),("all files","*.*")))
     # tkinter.StringVar(root, filename)
     filename.set(newfilename)
     
@@ -45,7 +46,7 @@ def start():
         return messagebox.showwarning("Error", "Invalid input")
 
     if (opt_mode == MODE_PLAYBACK):
-        print("playback " + opt_filename + " " + opt_port)
+        read(opt_filename, opt_port)
     elif (opt_mode == MODE_RECORD):
         print("record " + opt_filename + " " + opt_port)
 
