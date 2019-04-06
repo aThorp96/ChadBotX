@@ -1,17 +1,17 @@
 import serial
 
-
-def read(filename, port, baudrate=115200, bytesize=serial.EIGHTBITS):
-    f = open(filename, "w")
+# "./outputs/bytes.txt"
+# "/dev/ttyUSB0"
+def write(filename, port, baudrate=115200, bytesize=serial.EIGHTBITS):
+    f = open(filename, "rb")
     rx = serial.Serial(port, baudrate, bytesize)
-    
-    byte = f.read(1)
 
     next_byte_is_instruction = False
 
-    while bytes != "":
+    while bytes is not None:
         # Print each byte from serial data
-        byte = ord(f.read(1))
+        bytes = rx.read()
+        byte = ord(bytes)
 
         if (byte == 0xFF):
             # Begin instruction
@@ -22,9 +22,8 @@ def read(filename, port, baudrate=115200, bytesize=serial.EIGHTBITS):
             next_byte_is_instruction = False
         else:
             # Normal byte
-            rx.write(chr(byte))
+            f.write(chr(byte))
 
-# TODO: Update for read
 def execute(byte, f, rx):
     if (byte == 0xAA):
         # End of file
@@ -43,5 +42,3 @@ def terminate(f, rx):
     f.close()
     rx.close()
     quit()
-
-read("./outputs/bytes.txt", "/dev/ttyUSB0")
