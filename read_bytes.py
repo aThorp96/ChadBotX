@@ -1,6 +1,6 @@
 import serial
 
-def read(filename="./TAS-inputs/no-lag-frames.txt", port="/dev/ttyUSB0"):
+def read(filename="./TAS-inputs/no-lag-frames.txt", port="/dev/cu.usbmodem144240"):
     # Read bytes from arduino
     
     f = open(filename, "rb")
@@ -57,3 +57,5 @@ def terminate(f, rx):
     f.close()
     rx.close()
     quit()
+    
+#read()
