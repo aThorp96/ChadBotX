@@ -5,6 +5,6 @@ Second attempt at creating a TAS bot for the NES in under 24 hours at a hackatho
 
 # Results
 
-Ended up working but only after very particular configuration, could not get it to work on boot.
+Ended up working but only after very particular configuration; Could not get it to work on boot, causing desyncs after the first level.
 
 ![ChadBotX](https://github.com/aThorp96/ChadBotX/blob/master/screenshot.png)
